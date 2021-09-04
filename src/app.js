@@ -1,4 +1,4 @@
-import { max, sum } from './functions/util.js';
+﻿import { max, sum } from './functions/util.js';
 import { summary } from './functions/summary.js'
 import Life from './life.js'
 
@@ -31,7 +31,7 @@ class App{
         const loadingPage = $(`
         <div id="main">
             <div id="title">
-                人生重开模拟器<br>(小粉酱特供版V 1.1)<br>
+                人生重开模拟器<br>(小粉酱特供版V1.5)<br>
                 <div style="font-size:1.5rem; font-weight:normal;">加载中...</div>
             </div>
         </div>
@@ -44,7 +44,7 @@ class App{
             <button id="rank">排行榜</button>
             <button id="themeToggleBtn">黑</button>
             <div id="title">
-                人生重开模拟器<br>(小粉酱特供版V 1.1)<br>
+                人生重开模拟器<br>(小粉酱特供版V1.5)<br>
                 <div style="font-size:1.5rem; font-weight:normal;">这垃圾人生一秒也不想呆了</div>
             </div>
             <button id="restart" class="mainbtn"><span class="iconfont">&#xe6a7;</span>立即重开</button>
@@ -134,7 +134,7 @@ class App{
                     this.hint('请选择3个天赋');
                     return;
                 }
-                this.#totalMax = 20 + this.#life.getTalentAllocationAddition(Array.from(this.#talentSelected).map(({id})=>id));
+                this.#totalMax = 40 + this.#life.getTalentAllocationAddition(Array.from(this.#talentSelected).map(({id})=>id));
                 this.switch('property');
             })
 
@@ -205,10 +205,10 @@ class App{
             return {group, get, set};
         }
 
-        groups.CHR = getBtnGroups("颜值", 0, 10); // 颜值 charm CHR
-        groups.INT = getBtnGroups("智力", 0, 10); // 智力 intelligence INT
-        groups.STR = getBtnGroups("体质", 0, 10); // 体质 strength STR
-        groups.MNY = getBtnGroups("家境", 0, 10); // 家境 money MNY
+        groups.CHR = getBtnGroups("颜值", 0, 20); // 颜值 charm CHR
+        groups.INT = getBtnGroups("智力", 0, 20); // 智力 intelligence INT
+        groups.STR = getBtnGroups("体质", 0, 20); // 体质 strength STR
+        groups.MNY = getBtnGroups("家境", 0, 20); // 家境 money MNY
 
         const ul = propertyPage.find('#propertyAllocation');
 
@@ -220,9 +220,10 @@ class App{
             .find('#random')
             .click(()=>{
                 let t = this.#totalMax;
-                const arr = [10, 10, 10, 10];
+                const arr = [20, 20, 20, 20];
+                debugger
                 while(t>0) {
-                    const sub = Math.round(Math.random() * (Math.min(t, 10) - 1)) + 1;
+                    const sub = Math.round(Math.random() * (Math.min(t, 20) - 1)) + 1;
                     while(true) {
                         const select = Math.floor(Math.random() * 4) % 4;
                         if(arr[select] - sub <0) continue;
@@ -231,10 +232,10 @@ class App{
                         break;
                     }
                 }
-                groups.CHR.set(10 - arr[0]);
-                groups.INT.set(10 - arr[1]);
-                groups.STR.set(10 - arr[2]);
-                groups.MNY.set(10 - arr[3]);
+                groups.CHR.set(20 - arr[0]);
+                groups.INT.set(20 - arr[1]);
+                groups.STR.set(20 - arr[2]);
+                groups.MNY.set(20 - arr[3]);
             });
 
         propertyPage
